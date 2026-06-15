@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  
+  --color-clinic-blue-50: #0f172a;
+  --color-clinic-blue-100: #1e293b;
+  --color-clinic-blue-500: #0d9488;
+  --color-clinic-blue-600: #0f766e;
+  --color-clinic-blue-900: #0a0f18;
+  
+  --color-clinic-teal-50: #0a1f1d;
+  --color-clinic-teal-500: #14b8a6;
+  --color-clinic-teal-600: #0d9488;
+  
+  --color-clinic-gold-50: #18190d;
+  --color-clinic-gold-200: #fef08a;
+  --color-clinic-gold-500: #D4AF37;
+  --color-clinic-gold-600: #b59227;
+  --color-clinic-gold-700: #8a6c17;
+  
+  --color-sophisticated-bg: #0a0f18;
+  --color-sophisticated-card: #0d1522;
+  --color-sophisticated-gold: #D4AF37;
+  --color-sophisticated-teal: #14b8a6;
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 10px rgba(20, 184, 166, 0.3);
+  }
+  .gold-glow {
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+  }
+}

@@ -82,7 +82,7 @@ export default function Header({ activeTab, setActiveTab, openBookingModal }: He
           >
             <div className="w-10 h-10 rounded overflow-hidden flex items-center justify-center transition-transform hover:scale-105 duration-200 border border-white/10 shrink-0 bg-white">
               <img 
-                src="/src/assets/images/markz_favicon_1781484131489.jpg" 
+                src="/src/assets/images/markz_favicon_v2_1781484369789.jpg" 
                 alt="Marks Dental Clinic Logo Icon" 
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"

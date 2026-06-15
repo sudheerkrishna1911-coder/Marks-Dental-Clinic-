@@ -19,6 +19,15 @@ export default function AboutSection() {
               className="w-full h-full object-cover opacity-85 hover:opacity-100 transition-opacity duration-300"
               referrerPolicy="no-referrer"
             />
+            {/* Absolute badge overlay for our beautiful newly uploaded logo */}
+            <div className="absolute bottom-4 right-4 bg-white/95 p-2 sm:p-3 rounded-xl shadow-2xl border border-white/10 max-w-[140px] sm:max-w-[160px] cursor-pointer hover:scale-105 transition-transform duration-300">
+              <img 
+                src="/src/assets/images/markz_logo_v2_1781484356142.jpg" 
+                alt="Marks Dental Clinic Official Brand Logo" 
+                className="w-full h-auto object-contain rounded"
+                referrerPolicy="no-referrer"
+              />
+            </div>
           </div>
         </div>
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { Target, Heart, Award, ShieldCheck, CheckCircle2, FlaskConical } from 'lucide-react';
 import FoundersSection from './FoundersSection';
 
@@ -6,7 +7,13 @@ export default function AboutSection() {
   return (
     <div className="w-full flex flex-col py-12 md:py-24 px-4 bg-[#0a0f18] text-white">
       {/* Brand Intro & Story */}
-      <section className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-20 animate-fade-in font-sans">
+      <motion.section 
+        className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-20 font-sans"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      >
         
         {/* Story Illustration Grid */}
         <div className="lg:col-span-5 relative font-sans">
@@ -61,10 +68,16 @@ export default function AboutSection() {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Mission & Vision Bento Cards */}
-      <section className="bg-[#0b101b]/50 py-16 px-6 rounded-3xl max-w-7xl mx-auto w-full mb-20 border border-white/5">
+      <motion.section 
+        className="bg-[#0b101b]/50 py-16 px-6 rounded-3xl max-w-7xl mx-auto w-full mb-20 border border-white/5"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Mission Card */}
           <div className="bg-white/[0.02] p-8 rounded-2xl border border-white/5 flex flex-col gap-4">
@@ -88,13 +101,19 @@ export default function AboutSection() {
             </p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Meet the Founders Showcase */}
       <FoundersSection />
 
       {/* Facilities, Technology, & Hygiene Standards */}
-      <section className="max-w-7xl mx-auto w-full">
+      <motion.section 
+        className="max-w-7xl mx-auto w-full"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className="text-center max-w-2xl mx-auto mb-14 flex flex-col gap-3">
           <span className="text-[10px] uppercase tracking-widest text-[#D4AF37] font-bold block mb-1">Inside Our Clinic</span>
           <h2 className="font-serif font-light text-3xl text-white tracking-tight">Our Modern Facilities & Sterilization Standards</h2>
@@ -130,7 +149,7 @@ export default function AboutSection() {
             </div>
           ))}
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }

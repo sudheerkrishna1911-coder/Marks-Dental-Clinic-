@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { 
   ArrowRight, Phone, Award, ShieldCheck, HeartHandshake, Zap, 
   Star, ChevronRight, CheckCircle2, MessageSquare, Quote
@@ -28,7 +29,12 @@ export default function HomeSection({ setActiveTab, openBookingModal }: HomeSect
   return (
     <div className="w-full flex flex-col">
       {/* 1. Hero Section */}
-      <section className="relative bg-[#0a0f18] text-white pt-10 pb-20 md:py-28 px-4 overflow-hidden border-b border-white/5">
+      <motion.section 
+        className="relative bg-[#0a0f18] text-white pt-10 pb-20 md:py-28 px-4 overflow-hidden border-b border-white/5"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      >
         {/* Subtle geometric design grids background */}
         <div className="absolute top-0 right-0 w-1/3 h-full bg-radial-gradient from-teal-500/5 to-transparent rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-10 left-10 w-80 h-80 bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
@@ -112,10 +118,17 @@ export default function HomeSection({ setActiveTab, openBookingModal }: HomeSect
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 2. Features / Core Strengths Section */}
-      <section className="bg-[#0a0f18] py-20 px-4 border-b border-white/5" id="features">
+      <motion.section 
+        className="bg-[#0a0f18] py-20 px-4 border-b border-white/5" 
+        id="features"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16 flex flex-col gap-3">
             <span className="text-[10px] uppercase tracking-widest text-teal-400 font-bold">Why Choose Us?</span>
@@ -168,10 +181,17 @@ export default function HomeSection({ setActiveTab, openBookingModal }: HomeSect
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 3. Services Preview Section */}
-      <section className="bg-[#0d1522]/30 py-20 px-4 border-b border-white/5" id="services-intro">
+      <motion.section 
+        className="bg-[#0d1522]/30 py-20 px-4 border-b border-white/5" 
+        id="services-intro"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-14">
             <div className="text-left max-w-2xl flex flex-col gap-3">
@@ -223,10 +243,17 @@ export default function HomeSection({ setActiveTab, openBookingModal }: HomeSect
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 4. Google Reviews and Testimonials Combo */}
-      <section className="bg-[#0a0f18] py-20 px-4" id="testimonials">
+      <motion.section 
+        className="bg-[#0a0f18] py-20 px-4" 
+        id="testimonials"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className="max-w-7xl mx-auto">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -315,10 +342,16 @@ export default function HomeSection({ setActiveTab, openBookingModal }: HomeSect
           </div>
           
         </div>
-      </section>
+      </motion.section>
 
       {/* 5. Direct Booking Call-To-Action (CTA) panel */}
-      <section className="bg-gradient-to-br from-[#0d1522] via-[#0a0f18] to-[#0d1522] border-y border-white/10 py-16 px-4 text-white text-center relative overflow-hidden">
+      <motion.section 
+        className="bg-gradient-to-br from-[#0d1522] via-[#0a0f18] to-[#0d1522] border-y border-white/10 py-16 px-4 text-white text-center relative overflow-hidden"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className="absolute top-0 left-0 w-full h-full bg-teal-500/[0.02] pointer-events-none" />
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col gap-5">
           <h2 className="font-serif font-light text-3xl sm:text-4xl tracking-tight text-white">
@@ -342,7 +375,7 @@ export default function HomeSection({ setActiveTab, openBookingModal }: HomeSect
             </a>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }

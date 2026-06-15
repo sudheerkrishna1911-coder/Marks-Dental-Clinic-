@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Image, CheckCircle, HelpCircle, Eye, EyeOff, Sparkles } from 'lucide-react';
 import { CLINIC_GALLERY } from '../data';
 import { GalleryItem } from '../types';
@@ -6,6 +6,15 @@ import { GalleryItem } from '../types';
 export default function GallerySection() {
   const [activeCategory, setActiveCategory] = useState<'All' | 'Clinic' | 'Equipment' | 'Transformations'>('All');
   const [toggleBeforeAfter, setToggleBeforeAfter] = useState<{ [key: string]: 'Before' | 'After' }>({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [activeCategory]);
 
   const filteredGallery = CLINIC_GALLERY.filter((item) => {
     if (activeCategory === 'All') return true;
@@ -51,32 +60,57 @@ export default function GallerySection() {
 
       {/* Gallery Items Grid */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredGallery.map((item) => {
-          const isTransformation = item.category === 'Transformations';
-          // Default to 'After' unless requested 'Before'
-          const smileState = toggleBeforeAfter[item.id] || 'After';
-          
-          return (
+        {isLoading ? (
+          Array.from({ length: 6 }).map((_, i) => (
             <div 
-              key={item.id}
-              className="bg-[#0d1522]/40 rounded-2xl border border-white/5 shadow-2xl overflow-hidden flex flex-col hover:shadow-md hover:border-white/10 transition-all duration-300"
+              key={`gallery-skeleton-${i}`}
+              className="bg-[#0d1522]/40 rounded-2xl border border-white/5 shadow-2xl overflow-hidden flex flex-col animate-pulse"
+              id={`gallery-skeleton-card-${i}`}
             >
-              
-              {/* Photo box */}
-              <div className="relative aspect-[4/3] bg-slate-950 overflow-hidden group">
+              {/* Photo Box Skeleton */}
+              <div className="relative aspect-[4/3] bg-white/[0.02] overflow-hidden flex items-center justify-center">
+                <Image className="w-8 h-8 text-white/[0.05]" />
+                <div className="absolute top-4 right-4 bg-white/[0.03] w-20 h-5 rounded-full border border-white/5" />
+              </div>
+              {/* Text Particulars Skeleton */}
+              <div className="p-5 flex flex-col gap-3">
+                {/* Title skeleton */}
+                <div className="h-4 bg-[#D4AF37]/10 rounded w-2/3" />
+                {/* Description lines skeleton */}
+                <div className="flex flex-col gap-2">
+                  <div className="h-3 bg-white/[0.04] rounded w-full" />
+                  <div className="h-3 bg-white/[0.04] rounded w-5/6" />
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          filteredGallery.map((item) => {
+            const isTransformation = item.category === 'Transformations';
+            // Default to 'After' unless requested 'Before'
+            const smileState = toggleBeforeAfter[item.id] || 'After';
+            
+            return (
+              <div 
+                key={item.id}
+                className="bg-[#0d1522]/40 rounded-2xl border border-white/5 shadow-2xl overflow-hidden flex flex-col hover:shadow-md hover:border-white/10 transition-all duration-300"
+              >
                 
-                {/* Standard Photo */}
-                {!isTransformation ? (
-                  <img 
-                    src={item.imageUrl} 
-                    alt={item.title} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    referrerPolicy="no-referrer"
-                  />
-                ) : (
-                  /* Smile Transformation Toggle Box */
-                  <div className="w-full h-full relative">
+                {/* Photo box */}
+                <div className="relative aspect-[4/3] bg-slate-950 overflow-hidden group">
+                  
+                  {/* Standard Photo */}
+                  {!isTransformation ? (
                     <img 
+                      src={item.imageUrl} 
+                      alt={item.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    /* Smile Transformation Toggle Box */
+                    <div className="w-full h-full relative">
+                      <img 
                       src={smileState === 'Before' ? item.beforeAfter?.beforeUrl : item.beforeAfter?.afterUrl} 
                       alt={`${item.title} - ${smileState}`} 
                       className="w-full h-full object-cover animate-fade-in"
@@ -137,9 +171,9 @@ export default function GallerySection() {
 
             </div>
           );
-        })}
+        })
+      )}
       </div>
-      
     </div>
   );
 }

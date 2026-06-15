@@ -32,7 +32,7 @@ const FOUNDERS_DATA: Founder[] = [
     credentials: 'BDS, MDS (Conservative Dentistry & Endodontics)',
     specialties: ['Single-Visit Root Canals', 'Microscopic Endodontics', 'Pediatric Dentistry'],
     bio: 'Dr. Abhrasweta Baruah is highly regarded for her advanced, pain-free approach to protective pulp therapy and micro-endodontics. Her clinical passion is erasing dental-chair fear through state-of-the-art diagnostic scans, empathetic patient care, and zero-anxiety procedures optimized for kids and adults alike.',
-    image: 'https://images.unsplash.com/photo-1594824813573-246434e33963?auto=format&fit=crop&q=80&w=600',
+    image: '/src/assets/images/dr_abhrasweta_baruah_1781486357034.jpg',
     linkedin: 'https://linkedin.com/in/dr-abhrasweta-baruah',
     email: 'abhrasweta.baruah@marksdental.com',
     experience: '10+ Years Experience'

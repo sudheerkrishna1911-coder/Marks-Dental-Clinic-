@@ -9,8 +9,10 @@ import GallerySection from './components/GallerySection';
 import BlogSection from './components/BlogSection';
 import BookingSection from './components/BookingSection';
 import ContactSection from './components/ContactSection';
+import FAQSection from './components/FAQSection';
 import StaffDashboard from './components/StaffDashboard';
 import Chatbot from './components/Chatbot';
+import InstallPWAPrompt from './components/InstallPWAPrompt';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
@@ -60,6 +62,8 @@ export default function App() {
         return <GallerySection />;
       case 'blog':
         return <BlogSection />;
+      case 'faq':
+        return <FAQSection />;
       case 'contact':
         return <ContactSection />;
       case 'admin-portal':
@@ -220,6 +224,9 @@ export default function App() {
 
       {/* Global Interactive chatbot component */}
       <Chatbot />
+
+      {/* Custom PWA Install prompt (Triggers after 30 seconds of user engagement) */}
+      <InstallPWAPrompt />
 
     </div>
   );

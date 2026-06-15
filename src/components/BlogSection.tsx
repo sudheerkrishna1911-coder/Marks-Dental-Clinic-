@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BookOpen, User, Calendar, Clock, X, ArrowRight, Share2, Heart } from 'lucide-react';
 import { BLOG_ARTICLES } from '../data';
 import { BlogArticle } from '../types';
@@ -9,6 +9,15 @@ export default function BlogSection() {
   const [likeCounts, setLikeCounts] = useState<{ [key: string]: number }>({});
   const [hasLiked, setHasLiked] = useState<{ [key: string]: boolean }>({});
   const [shareCopied, setShareCopied] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 700);
+    return () => clearTimeout(timer);
+  }, [activeCategory]);
 
   const categories = ['All', 'Hygiene & Care', 'Prevention', 'Restorative', 'Nutrition'] as const;
 
@@ -67,82 +76,128 @@ export default function BlogSection() {
 
       {/* Blog Articles Grid */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-        {filteredArticles.map((article) => {
-          const currentLikes = likeCounts[article.id] || 24;
-          const userLiked = hasLiked[article.id];
-          return (
-            <article 
-              key={article.id}
-              onClick={() => setSelectedArticle(article)}
-              className="bg-[#0d1522]/40 rounded-2xl border border-white/5 shadow-2xl overflow-hidden flex flex-col hover:shadow-2xl hover:border-white/10 hover:bg-[#0d1522]/80 transition-all cursor-pointer hover:-translate-y-1 duration-300"
+        {isLoading ? (
+          Array.from({ length: 4 }).map((_, i) => (
+            <div 
+              key={`blog-skeleton-${i}`}
+              className="bg-[#0d1522]/40 rounded-2xl border border-white/5 shadow-2xl overflow-hidden flex flex-col animate-pulse"
+              id={`blog-skeleton-card-${i}`}
             >
-              {/* Photo */}
-              <div className="relative aspect-[16/9] overflow-hidden bg-slate-900">
-                <img 
-                  src={article.imageUrl} 
-                  alt={article.title} 
-                  className="w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
-                />
-                <span className="absolute top-4 left-4 bg-[#0a0f18]/90 text-[10px] text-teal-400 font-bold px-2.5 py-1 rounded border border-white/10 uppercase tracking-widest font-sans">
-                  {article.category}
-                </span>
-              </div>
+              {/* Photo placeholder */}
+              <div className="relative aspect-[16/9] bg-white/[0.02]" />
 
               {/* Detail Content */}
               <div className="p-6 flex flex-col gap-3.5 flex-grow justify-between">
                 <div>
-                  <div className="flex items-center gap-4 text-xs font-sans text-gray-400">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5 text-teal-450" /> {article.date}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5 text-teal-450" /> {article.readTime}
-                    </span>
+                  <div className="flex items-center gap-4 text-xs">
+                    <div className="h-3 bg-white/[0.04] rounded w-16" />
+                    <div className="h-3 bg-white/[0.04] rounded w-16" />
                   </div>
                   
-                  <h3 className="font-serif text-[#D4AF37] text-lg sm:text-xl tracking-tight leading-snug mt-2 text-balance font-light">
-                    {article.title}
-                  </h3>
+                  <div className="h-5 bg-[#D4AF37]/10 rounded w-3/4 mt-4" />
+                  <div className="h-5 bg-[#D4AF37]/10 rounded w-1/2 mt-2" />
                   
-                  <p className="font-sans text-gray-400 text-xs sm:text-sm leading-relaxed text-pretty mt-1">
-                    {article.excerpt}
-                  </p>
+                  <div className="flex flex-col gap-2 mt-4">
+                    <div className="h-3 bg-white/[0.04] rounded w-full" />
+                    <div className="h-3 bg-white/[0.04] rounded w-11/12" />
+                  </div>
                 </div>
 
-                <div className="border-t border-white/5 pt-4 mt-2 flex items-center justify-between">
+                <div className="border-t border-white/5 pt-4 mt-6 flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#D4AF37] to-teal-500 flex items-center justify-center text-[#0a0f18] text-[10px] uppercase font-mono font-black">
-                      {article.author.charAt(4) || 'DS'}
-                    </div>
-                    <div>
-                      <p className="font-sans text-xs font-bold text-white leading-none">{article.author}</p>
-                      <p className="font-sans text-[10px] text-gray-500 mt-1">Dental Specialist</p>
+                    <div className="w-8 h-8 rounded-full bg-white/[0.03] border border-white/5" />
+                    <div className="flex flex-col gap-1.5">
+                      <div className="h-3 bg-white/[0.04] rounded w-20" />
+                      <div className="h-2.5 bg-white/[0.02] rounded w-14" />
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    {/* Social Like indicator */}
-                    <button 
-                      onClick={(e) => handleLike(article.id, e)}
-                      className={`flex items-center gap-1 text-[10px] font-sans font-bold cursor-pointer transition-colors px-2.5 py-1 rounded ${userLiked ? 'text-black bg-teal-500' : 'text-gray-400 hover:text-white bg-white/[0.02]'}`}
-                      title={userLiked ? "Unlike" : "Like"}
-                    >
-                      <Heart className={`w-3.5 h-3.5 ${userLiked ? 'fill-current' : ''}`} />
-                      <span>{currentLikes}</span>
-                    </button>
-                    
-                    <span className="text-xs font-bold text-teal-450 text-teal-400 flex items-center gap-1 uppercase tracking-widest">
-                      <span>Read</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
+                    <div className="w-16 h-6 bg-white/[0.03] rounded-md border border-white/5" />
+                    <div className="w-12 h-4 bg-teal-500/10 rounded" />
                   </div>
                 </div>
               </div>
+            </div>
+          ))
+        ) : (
+          filteredArticles.map((article) => {
+            const currentLikes = likeCounts[article.id] || 24;
+            const userLiked = hasLiked[article.id];
+            return (
+              <article 
+                key={article.id}
+                onClick={() => setSelectedArticle(article)}
+                className="bg-[#0d1522]/40 rounded-2xl border border-white/5 shadow-2xl overflow-hidden flex flex-col hover:shadow-2xl hover:border-white/10 hover:bg-[#0d1522]/80 transition-all cursor-pointer hover:-translate-y-1 duration-300"
+              >
+                {/* Photo */}
+                <div className="relative aspect-[16/9] overflow-hidden bg-slate-900">
+                  <img 
+                    src={article.imageUrl} 
+                    alt={article.title} 
+                    className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                  <span className="absolute top-4 left-4 bg-[#0a0f18]/90 text-[10px] text-teal-400 font-bold px-2.5 py-1 rounded border border-white/10 uppercase tracking-widest font-sans">
+                    {article.category}
+                  </span>
+                </div>
 
-            </article>
-          );
-        })}
+                {/* Detail Content */}
+                <div className="p-6 flex flex-col gap-3.5 flex-grow justify-between">
+                  <div>
+                    <div className="flex items-center gap-4 text-xs font-sans text-gray-400">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-3.5 h-3.5 text-teal-450" /> {article.date}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3.5 h-3.5 text-teal-450" /> {article.readTime}
+                      </span>
+                    </div>
+                    
+                    <h3 className="font-serif text-[#D4AF37] text-lg sm:text-xl tracking-tight leading-snug mt-2 text-balance font-light">
+                      {article.title}
+                    </h3>
+                    
+                    <p className="font-sans text-gray-400 text-xs sm:text-sm leading-relaxed text-pretty mt-1">
+                      {article.excerpt}
+                    </p>
+                  </div>
+
+                  <div className="border-t border-white/5 pt-4 mt-2 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#D4AF37] to-teal-500 flex items-center justify-center text-[#0a0f18] text-[10px] uppercase font-mono font-black">
+                        {article.author.charAt(4) || 'DS'}
+                      </div>
+                      <div>
+                        <p className="font-sans text-xs font-bold text-white leading-none">{article.author}</p>
+                        <p className="font-sans text-[10px] text-gray-500 mt-1">Dental Specialist</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      {/* Social Like indicator */}
+                      <button 
+                        onClick={(e) => handleLike(article.id, e)}
+                        className={`flex items-center gap-1 text-[10px] font-sans font-bold cursor-pointer transition-colors px-2.5 py-1 rounded ${userLiked ? 'text-black bg-teal-500' : 'text-gray-400 hover:text-white bg-white/[0.02]'}`}
+                        title={userLiked ? "Unlike" : "Like"}
+                      >
+                        <Heart className={`w-3.5 h-3.5 ${userLiked ? 'fill-current' : ''}`} />
+                        <span>{currentLikes}</span>
+                      </button>
+                      
+                      <span className="text-xs font-bold text-teal-450 text-teal-400 flex items-center gap-1 uppercase tracking-widest">
+                        <span>Read</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+              </article>
+            );
+          })
+        )}
       </div>
 
       {/* Main Full Blog Modal Reader */}

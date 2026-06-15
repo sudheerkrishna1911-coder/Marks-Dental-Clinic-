@@ -1,5 +1,5 @@
-import React from 'react';
-import { Phone, Mail, MapPin, Clock, Stethoscope, Facebook, Instagram, Twitter, MessageCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { Phone, Mail, MapPin, Clock, Stethoscope, Facebook, Instagram, Twitter, MessageCircle, Send, Check } from 'lucide-react';
 
 interface FooterProps {
   setActiveTab: (tab: string) => void;
@@ -7,6 +7,34 @@ interface FooterProps {
 }
 
 export default function Footer({ setActiveTab, openBookingModal }: FooterProps) {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState('');
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !email.includes('@')) {
+      setStatus('error');
+      setMessage('Please enter a valid email address.');
+      return;
+    }
+
+    setStatus('loading');
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 800));
+      const currentEmails = JSON.parse(localStorage.getItem('newsletter_emails') || '[]');
+      if (!currentEmails.includes(email)) {
+        currentEmails.push(email);
+        localStorage.setItem('newsletter_emails', JSON.stringify(currentEmails));
+      }
+      setStatus('success');
+      setMessage('Thank you for subscribing! Welcome aboard. ✨');
+      setEmail('');
+    } catch (err) {
+      setStatus('error');
+      setMessage('Subscription failed. Please try again.');
+    }
+  };
   
   const handleNavigation = (tabId: string) => {
     setActiveTab(tabId);
@@ -17,6 +45,57 @@ export default function Footer({ setActiveTab, openBookingModal }: FooterProps) 
 
   return (
     <footer className="bg-[#05080c] text-gray-300 pt-16 pb-8 border-t border-white/10">
+      {/* Newsletter Signup Row */}
+      <div className="max-w-7xl mx-auto px-4 pb-12 mb-12 border-b border-white/5 flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div className="max-w-md">
+          <h3 className="font-serif text-[#D4AF37] text-lg sm:text-xl tracking-tight font-light col-span-full">Stay Updated on Oral Health</h3>
+          <p className="font-sans text-xs text-gray-400 mt-1 leading-relaxed">
+            Subscribe to our clinic newsletter for professional dental hygiene tips, exclusive updates, and priority slot announcements directly from our MDS consultants.
+          </p>
+        </div>
+        <form onSubmit={handleSubscribe} className="w-full lg:w-auto flex-1 max-w-md flex flex-col gap-2">
+          <div className="relative flex items-center">
+            <span className="absolute left-3.5 text-gray-500">
+              <Mail className="w-4 h-4" />
+            </span>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (status === 'error') setStatus('idle');
+              }}
+              placeholder="Enter your email address"
+              className="w-full bg-white/[0.03] border border-white/10 text-white rounded-lg pl-10 pr-28 py-3 text-xs sm:text-sm placeholder-gray-500 focus:outline-none focus:border-teal-500 hover:border-white/20 transition-all font-sans"
+              disabled={status === 'loading' || status === 'success'}
+              id="newsletter-email-input"
+            />
+            <button
+              type="submit"
+              disabled={status === 'loading' || status === 'success'}
+              id="newsletter-subscribe-button"
+              className="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-teal-500 hover:bg-teal-400 text-[#0a0f18] text-xs font-bold font-sans rounded-md transition-all flex items-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            >
+              {status === 'loading' ? (
+                <span className="w-3.5 h-3.5 border-2 border-[#0a0f18] border-t-transparent rounded-full animate-spin" />
+              ) : status === 'success' ? (
+                <Check className="w-3.5 h-3.5" />
+              ) : (
+                <>
+                  <span>Subscribe</span>
+                  <Send className="w-3.5 h-3.5" />
+                </>
+              )}
+            </button>
+          </div>
+          {message && (
+            <p className={`font-sans text-xs mt-1 ${status === 'success' ? 'text-teal-400 font-medium' : 'text-rose-400'}`} id="newsletter-status-message">
+              {message}
+            </p>
+          )}
+        </form>
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         {/* About & Branding Column */}
         <div className="flex flex-col gap-5">
@@ -81,7 +160,7 @@ export default function Footer({ setActiveTab, openBookingModal }: FooterProps) 
         <div className="flex flex-col gap-4">
           <h3 className="font-sans font-bold text-xs uppercase tracking-widest text-[#D4AF37] gold-glow">Quick Links</h3>
           <ul className="flex flex-col gap-2.5 font-sans text-xs sm:text-sm text-gray-400">
-            {['Home', 'About Us', 'Services', 'Gallery', 'Blog', 'Contact Us'].map((item) => {
+            {['Home', 'About Us', 'Services', 'Gallery', 'Blog', 'FAQ', 'Contact Us'].map((item) => {
               const id = item.toLowerCase().replace(' ', '');
               const tabId = id === 'aboutus' ? 'about' : id === 'contactus' ? 'contact' : id;
               return (

@@ -82,6 +82,11 @@ Your responsibilities:
     }
   });
 
+  // Serve the PWA app icon statically
+  app.get("/pwa-icon.jpg", (req, res) => {
+    res.sendFile(path.resolve(process.cwd(), "src/assets/images/pwa_icon_512_1781487492331.jpg"));
+  });
+
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({

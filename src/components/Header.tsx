@@ -29,6 +29,7 @@ export default function Header({ activeTab, setActiveTab, openBookingModal }: He
     { id: 'services', label: 'Services' },
     { id: 'gallery', label: 'Gallery' },
     { id: 'blog', label: 'Blog' },
+    { id: 'faq', label: 'FAQ' },
     { id: 'contact', label: 'Contact Us' },
   ];
 

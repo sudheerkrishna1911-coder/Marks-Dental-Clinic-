@@ -1,14 +1,39 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { 
   ShieldCheck, Sparkles, Smile, Layers, Activity, 
   HeartHandshake, Sun, Crown, HeartPulse, ChevronDown, 
-  ChevronUp, CheckCircle, Flame, Plus, Minus
+  ChevronUp, CheckCircle, Flame, Plus, Minus, Stethoscope
 } from 'lucide-react';
 import { CLINIC_SERVICES } from '../data';
 import { ServiceItem } from '../types';
 
 export default function ServicesSection() {
   const [openFaqIndex, setOpenFaqIndex] = useState<{ [key: string]: number }>({});
+  const [tilt, setTilt] = useState<{ [key: string]: { x: number; y: number } }>({});
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, id: string) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -1.5; // subtle tilt (max 1.5deg)
+    const rotateY = ((x - centerX) / centerX) * 1.5;  // subtle tilt (max 1.5deg)
+    
+    setTilt(prev => ({
+      ...prev,
+      [id]: { x: rotateX, y: rotateY }
+    }));
+  };
+
+  const handleMouseLeave = (id: string) => {
+    setTilt(prev => ({
+      ...prev,
+      [id]: { x: 0, y: 0 }
+    }));
+  };
 
   const toggleFaq = (serviceId: string, index: number) => {
     setOpenFaqIndex((prev) => {
@@ -20,26 +45,31 @@ export default function ServicesSection() {
     });
   };
 
-  const getServiceIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'Shield':
-        return <ShieldCheck className="w-6 h-6 text-teal-400" />;
-      case 'Sparkles':
-        return <Sparkles className="w-6 h-6 text-teal-400" />;
-      case 'Smile':
-        return <Smile className="w-6 h-6 text-teal-400" />;
-      case 'Layers':
-        return <Layers className="w-6 h-6 text-teal-400" />;
-      case 'Activity':
-        return <Activity className="w-6 h-6 text-teal-400" />;
-      case 'HeartHandshake':
-        return <HeartHandshake className="w-6 h-6 text-teal-400" />;
-      case 'Sun':
-        return <Sun className="w-6 h-6 text-teal-400" />;
-      case 'Crown':
-        return <Crown className="w-6 h-6 text-teal-400" />;
+  const getServiceIcon = (id: string, sizeClass = "w-6 h-6", colorClass = "text-teal-400 group-hover:text-[#D4AF37]") => {
+    const combinedClass = `${sizeClass} ${colorClass} transition-all duration-300 transform group-hover:scale-110`;
+    switch (id) {
+      case 'general-dentistry':
+        return <Stethoscope className={combinedClass} />;
+      case 'cosmetic-dentistry':
+        return <Sparkles className={combinedClass} />;
+      case 'orthodontics':
+        return <Smile className={combinedClass} />;
+      case 'dental-implants':
+        return <Layers className={combinedClass} />;
+      case 'root-canal-therapy':
+        return <Activity className={combinedClass} />;
+      case 'pediatric-dentistry':
+        return <HeartHandshake className={combinedClass} />;
+      case 'gum-treatment':
+        return <Flame className={combinedClass} />;
+      case 'teeth-whitening':
+        return <Sun className={combinedClass} />;
+      case 'crowns-and-bridges':
+        return <Crown className={combinedClass} />;
+      case 'preventive-dental':
+        return <ShieldCheck className={combinedClass} />;
       default:
-        return <HeartPulse className="w-6 h-6 text-teal-400" />;
+        return <HeartPulse className={combinedClass} />;
     }
   };
 
@@ -74,9 +104,11 @@ export default function ServicesSection() {
               <button
                 key={`side-${serv.id}`}
                 onClick={() => handleSidebarClick(serv.id)}
-                className="text-left font-sans text-gray-450 hover:text-teal-400 py-2 px-3 hover:bg-white/[0.03] rounded-lg transition-all flex items-center gap-2 cursor-pointer group"
+                className="text-left font-sans text-gray-450 hover:text-teal-400 py-2.5 px-3 hover:bg-white/[0.03] rounded-lg transition-all flex items-center gap-3 cursor-pointer group"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-gray-700 group-hover:bg-teal-500 shrink-0 transition-colors" />
+                <div className="shrink-0 flex items-center justify-center">
+                  {getServiceIcon(serv.id, "w-4 h-4", "text-gray-500 group-hover:text-teal-400")}
+                </div>
                 <span className="truncate">{serv.name}</span>
               </button>
             ))}
@@ -86,16 +118,31 @@ export default function ServicesSection() {
         {/* Detailed Services Content Columns */}
         <main className="lg:col-span-8 flex flex-col gap-14">
           {CLINIC_SERVICES.map((service, sIndex) => (
-            <section 
+            <motion.section 
               key={service.id} 
               id={service.id}
-              className="bg-[#0d1522]/40 rounded-2xl border border-white/5 shadow-2xl p-6 sm:p-8 flex flex-col gap-6 scroll-mt-24 relative hover:border-white/10 hover:bg-[#0d1522]/80 transition-all duration-300"
+              onMouseMove={(e) => handleMouseMove(e, service.id)}
+              onMouseLeave={() => handleMouseLeave(service.id)}
+              animate={{
+                rotateX: tilt[service.id]?.x || 0,
+                rotateY: tilt[service.id]?.y || 0,
+                scale: (tilt[service.id]?.x || tilt[service.id]?.y) ? 1.015 : 1,
+                y: (tilt[service.id]?.x || tilt[service.id]?.y) ? -4 : 0,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 30,
+                mass: 0.8
+              }}
+              style={{ transformStyle: "preserve-3d", perspective: 1000 }}
+              className="bg-[#0d1522]/40 rounded-2xl border border-white/5 shadow-2xl p-6 sm:p-8 flex flex-col gap-6 scroll-mt-24 relative hover:border-white/10 hover:bg-[#0d1522]/80 transition-colors duration-300"
             >
               {/* Service header banner */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/5 pb-6">
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-teal-500/10 rounded-xl flex items-center justify-center">
-                    {getServiceIcon(service.iconName)}
+                    {getServiceIcon(service.id, "w-6 h-6")}
                   </div>
                   <div>
                     <h3 className="font-serif text-[#D4AF37] text-xl sm:text-2xl tracking-tight leading-tight font-light">{service.name}</h3>
@@ -185,7 +232,7 @@ export default function ServicesSection() {
                 </div>
               </div>
 
-            </section>
+            </motion.section>
           ))}
         </main>
         

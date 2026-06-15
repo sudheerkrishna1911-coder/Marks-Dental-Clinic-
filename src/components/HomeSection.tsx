@@ -5,6 +5,8 @@ import {
   Star, ChevronRight, CheckCircle2, MessageSquare, Quote
 } from 'lucide-react';
 import { CLINIC_SERVICES, PATIENT_TESTIMONIALS } from '../data';
+import TestimonialsSection from './TestimonialsSection';
+import DailyDentalTip from './DailyDentalTip';
 
 interface HomeSectionProps {
   setActiveTab: (tab: string) => void;
@@ -101,7 +103,7 @@ export default function HomeSection({ setActiveTab, openBookingModal }: HomeSect
             
             <div className="relative rounded-2xl overflow-hidden aspect-square sm:aspect-[4/3] lg:aspect-[1/1] shadow-2xl border border-white/10 bg-[#0d1522]">
               <img 
-                src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=1000" 
+                src="/src/assets/images/clinic_waiting_lounge_1781487914836.jpg" 
                 alt="Markz Dental Clinic interior clinic checkup Guwahati" 
                 className="w-full h-full object-cover opacity-85 hover:opacity-100 transition-opacity duration-300"
                 referrerPolicy="no-referrer"
@@ -119,6 +121,9 @@ export default function HomeSection({ setActiveTab, openBookingModal }: HomeSect
           </div>
         </div>
       </motion.section>
+
+      {/* 1.5 Daily Dental Tip Ticker */}
+      <DailyDentalTip />
 
       {/* 2. Features / Core Strengths Section */}
       <motion.section 
@@ -245,104 +250,8 @@ export default function HomeSection({ setActiveTab, openBookingModal }: HomeSect
         </div>
       </motion.section>
 
-      {/* 4. Google Reviews and Testimonials Combo */}
-      <motion.section 
-        className="bg-[#0a0f18] py-20 px-4" 
-        id="testimonials"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <div className="max-w-7xl mx-auto">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            {/* Google Reviews Trust Widget Panel */}
-            <div className="lg:col-span-4 bg-[#0d1522] p-8 border border-white/10 rounded-2xl text-white shadow-2xl flex flex-col gap-6 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-teal-500/5 blur-3xl rounded-full" />
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#D4AF37]/5 blur-3xl rounded-full" />
-
-              <div>
-                <span className="text-[10px] font-sans font-bold text-teal-400 uppercase tracking-widest block mb-1">Guwahati Clinic Feedback</span>
-                <h3 className="font-serif font-light text-2xl tracking-tight text-white">Verified Google Reviews</h3>
-              </div>
-
-              <div className="flex items-baseline gap-2">
-                <span className="font-serif font-light text-5xl text-[#D4AF37] gold-glow">4.9</span>
-                <span className="text-gray-400 font-sans text-sm">out of 5 stars</span>
-              </div>
-
-              <div className="flex gap-1">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} className="w-4 h-4 text-[#D4AF37] fill-[#D4AF37]" />
-                ))}
-              </div>
-
-              <p className="font-sans text-xs sm:text-sm text-gray-400 leading-relaxed">
-                Backed by <strong>340+ certified organic reviews</strong> from localized residents across Guwahati, Khanapara, Paltan Bazaar, and general Assam.
-              </p>
-
-              <div className="bg-white/[0.02] border border-white/5 p-4 rounded-xl flex items-center gap-3">
-                <div className="w-9 h-9 bg-teal-500 rounded flex items-center justify-center font-serif text-lg font-bold text-[#0a0f18] uppercase select-none">
-                  G
-                </div>
-                <div>
-                  <p className="font-sans font-bold text-xs text-white">Markz Dental Clinic Guwahati</p>
-                  <p className="font-sans text-[10px] text-gray-500">Official Business Listing</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Testimonial slider / list */}
-            <div className="lg:col-span-8 flex flex-col gap-8">
-              <div className="text-left flex flex-col gap-2">
-                <span className="text-[10px] uppercase tracking-widest text-[#D4AF37] font-bold">Patient Stories</span>
-                <h3 className="font-serif font-light text-2xl sm:text-3xl text-white tracking-tight">Loved by Thousands of Happy Patients</h3>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {PATIENT_TESTIMONIALS.map((review) => (
-                  <div 
-                    key={review.id}
-                    className="p-6 bg-[#0d1522]/40 rounded-xl border border-white/5 hover:border-white/10 transition-all duration-300 relative flex flex-col justify-between"
-                  >
-                    <Quote className="absolute top-4 right-4 w-12 h-12 text-white/5 pointer-events-none" />
-                    
-                    <div className="flex flex-col gap-3">
-                      <div className="flex gap-0.5">
-                        {[...Array(review.rating)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-[#D4AF37] text-[#D4AF37]" />
-                        ))}
-                      </div>
-                      <p className="font-sans text-xs sm:text-sm text-gray-300 leading-relaxed italic text-pretty">
-                        "{review.comment}"
-                      </p>
-                    </div>
-
-                    <div className="border-t border-white/5 pt-4 mt-4 flex items-center justify-between">
-                      <div>
-                        <h4 className="font-sans font-bold text-white text-xs sm:text-sm">{review.name}</h4>
-                        <span className="text-[9px] bg-teal-500/10 text-teal-400 font-sans px-1.5 py-0.5 rounded border border-teal-500/20 font-bold uppercase tracking-wider mt-1.5 inline-block">
-                          {review.treatment}
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-end">
-                        <span className="text-[10px] text-teal-400 font-semibold flex items-center gap-1">
-                          <CheckCircle2 className="w-3 h-3 fill-teal-500/10 text-teal-400" /> Verified
-                        </span>
-                        <span className="text-[10px] text-gray-500 mt-0.5">{review.date}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-          </div>
-          
-        </div>
-      </motion.section>
+      {/* 4. Horizontal Swipeable Patient Testimonials Carousel */}
+      <TestimonialsSection />
 
       {/* 5. Direct Booking Call-To-Action (CTA) panel */}
       <motion.section 

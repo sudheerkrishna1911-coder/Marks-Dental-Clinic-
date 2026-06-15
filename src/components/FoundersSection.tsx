@@ -21,7 +21,7 @@ const FOUNDERS_DATA: Founder[] = [
     credentials: 'BDS, MDS (Prosthodontics and Crown & Bridge)',
     specialties: ['Digital Smile Design', 'Full-Mouth Dental Implants', 'Oral Prosthetics'],
     bio: 'Dr. Sudheer Krishna is a pioneering prosthodontist recognized for his microscopic precision in restoring complex oral structures. With over a decade of specialty training, he specializes in full-mouth dental implants and seamless aesthetic reconstructions, ensuring each dental work is durable, comforting, and visually perfect.',
-    image: '/src/assets/images/dr_sudheer_krishna_1781487897889.jpg',
+    image: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600',
     linkedin: 'https://linkedin.com/in/dr-sudheer-krishna',
     email: 'sudheer.krishna19.11@gmail.com',
     experience: '12+ Years Experience'

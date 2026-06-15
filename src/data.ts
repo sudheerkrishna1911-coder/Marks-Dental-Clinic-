@@ -337,7 +337,7 @@ Here is why preventive cleanings pay heavy dividends:
 Schedule a professional scaling and visual screen. It keeps your smile dazzling and saves significant stress and expense.`,
     readTime: '3 min read',
     category: 'Prevention',
-    imageUrl: '/src/assets/images/clinic_operatory_1781487931991.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=800',
     date: 'May 28, 2026',
     author: 'Dr. Pritam Das (MDS, Periodontology)'
   },
@@ -357,7 +357,7 @@ To ensure your smile lasts a lifetime, adopt this daily implant care checklist:
 With clean surroundings and smart lifestyle habits, your custom implants will remain strong and beautiful for decades.`,
     readTime: '5 min read',
     category: 'Restorative',
-    imageUrl: '/src/assets/images/3d_intraoral_scanner_1781487948236.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1447452001602-7090c7ab2db3?auto=format&fit=crop&q=80&w=800',
     date: 'April 15, 2026',
     author: 'Dr. Niharika Sharma (MDS, Prosthodontics)'
   },
@@ -426,39 +426,39 @@ export const CLINIC_GALLERY: GalleryItem[] = [
     id: 'gal-1',
     category: 'Clinic',
     title: 'Waiting Lounge & Reception',
-    imageUrl: '/src/assets/images/clinic_waiting_lounge_1781487914836.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800',
     description: 'Our luxurious, air-conditioned waiting space designed to offer instant relaxation before treatments.'
   },
   {
     id: 'gal-2',
     category: 'Equipment',
     title: 'Advanced Diagnostic Operatory',
-    imageUrl: '/src/assets/images/clinic_operatory_1781487931991.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800',
     description: 'Equipped with ergonomic dental chairs, digital dental operatory displays, and sterilizing tools.'
   },
   {
     id: 'gal-3',
     category: 'Equipment',
     title: '3D Intraoral Dental Scanner',
-    imageUrl: '/src/assets/images/3d_intraoral_scanner_1781487948236.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1447452001602-7090c7ab2db3?auto=format&fit=crop&q=80&w=800',
     description: 'Precision digital scanner for immediate orthodontic planning and laboratory crown engineering.'
   },
   {
     id: 'gal-4',
     category: 'Clinic',
     title: 'Sterilization & Autoclave Unit',
-    imageUrl: '/src/assets/images/sterilization_unit_1781487965828.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&q=80&w=800',
     description: 'Class-B dental autoclave sterilization system following strict international hygiene protocols.'
   },
   {
     id: 'gal-5',
     category: 'Transformations',
     title: 'Porcelain Smile Reconstruction',
-    imageUrl: '/src/assets/images/smile_transformation_1781487985014.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=800',
     description: 'Full aesthetic E-max treatment rectifying severe fluorosis staining and developmental enamel defects.',
     beforeAfter: {
-      beforeUrl: '/src/assets/images/clinic_operatory_1781487931991.jpg', // representative smile preparation
-      afterUrl: '/src/assets/images/smile_transformation_1781487985014.jpg' // beautiful smile
+      beforeUrl: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=300', // representative smile preparation
+      afterUrl: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=300' // beautiful smile
     }
   }
 ];

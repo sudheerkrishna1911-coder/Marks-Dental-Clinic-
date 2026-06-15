@@ -22,7 +22,7 @@ export default function AboutSection() {
           
           <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 aspect-square sm:aspect-[4/3] lg:aspect-[1/1] bg-[#0d1522]">
             <img 
-              src="/src/assets/images/clinic_operatory_1781487931991.jpg" 
+              src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800" 
               alt="Markz Dental Clinic Advanced Diagnostic Dental Operatory" 
               className="w-full h-full object-cover opacity-85 hover:opacity-100 transition-opacity duration-300"
               referrerPolicy="no-referrer"

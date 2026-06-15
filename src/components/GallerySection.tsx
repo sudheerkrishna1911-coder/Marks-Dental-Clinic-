@@ -25,7 +25,7 @@ export default function GallerySection() {
       {/* Intro Header */}
       <div className="text-center max-w-2xl mx-auto mb-12 flex flex-col gap-3">
         <span className="text-[10px] uppercase tracking-widest text-[#D4AF37] font-bold block">Photo Showcase</span>
-        <h2 className="font-serif font-light text-3xl sm:text-4xl text-white tracking-tight">Explore Marks Dental Clinic</h2>
+        <h2 className="font-serif font-light text-3xl sm:text-4xl text-white tracking-tight">Explore Markz Dental Clinic</h2>
         <div className="h-0.5 w-12 bg-[#D4AF37] mx-auto rounded-full mt-1" />
         <p className="font-sans text-gray-400 text-sm leading-relaxed mt-2 text-pretty">
           Step inside our clinical operatories, view our hygienic sterilization tools, and analyze the premium dental implants and orthodontic smile corrections we deliver.

@@ -11,15 +11,24 @@ import BookingSection from './components/BookingSection';
 import ContactSection from './components/ContactSection';
 import StaffDashboard from './components/StaffDashboard';
 import Chatbot from './components/Chatbot';
+import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('home');
   const [isBookingModalOpen, setIsBookingModalOpen] = useState<boolean>(false);
   const [showScrollTop, setShowScrollTop] = useState<boolean>(false);
+  const [scrollProgress, setScrollProgress] = useState<number>(0);
 
-  // Scroll visibility watch for "Scroll to Top" indicator
+  // Scroll visibility watch & progress tracking for "Scroll to Top" indicator
   useEffect(() => {
     const handleScroll = () => {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollHeight > 0) {
+        setScrollProgress((window.scrollY / scrollHeight) * 100);
+      } else {
+        setScrollProgress(0);
+      }
+
       if (window.scrollY > 300) {
         setShowScrollTop(true);
       } else {
@@ -102,17 +111,57 @@ export default function App() {
         </span>
       </a>
 
-      {/* Scroll to Top */}
-      {showScrollTop && (
-        <button
-          onClick={handleScrollToTop}
-          className="fixed bottom-24 right-6 bg-[#0d1522] hover:bg-[#142033] text-[#D4AF37] p-3.5 rounded-full shadow-xl hover:shadow-2xl transition-all hover:scale-105 z-45 hidden md:flex items-center justify-center border border-white/10 cursor-pointer"
-          title="Scroll To Top"
-          id="desktop-scroll-top"
-        >
-          <ArrowUp className="w-5 h-5 text-[#D4AF37] stroke-[2]" />
-        </button>
-      )}
+      {/* Scroll to Top with Dynamic Progress Ring and Motion Transitions */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.6, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.6, y: 20 }}
+            transition={{ type: "spring", damping: 15, stiffness: 220 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleScrollToTop}
+            className="fixed bottom-20 right-6 md:bottom-24 md:right-6 bg-[#0c1320]/95 backdrop-blur-sm text-[#D4AF37] w-12 h-12 rounded-full shadow-2xl hover:shadow-[#D4AF37]/20 transition-all z-45 flex items-center justify-center border border-white/10 cursor-pointer group"
+            title="Scroll to Top"
+            id="global-scroll-top-button"
+          >
+            {/* SVG Circular Progress Track */}
+            <svg className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewBox="0 0 36 36">
+              <circle
+                cx="18"
+                cy="18"
+                r="15"
+                fill="none"
+                className="stroke-white/5"
+                strokeWidth="2.5"
+              />
+              <motion.circle
+                cx="18"
+                cy="18"
+                r="15"
+                fill="none"
+                className="stroke-teal-400"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeDasharray="94.25"
+                animate={{ strokeDashoffset: 94.25 - (scrollProgress / 100) * 94.25 }}
+                transition={{ duration: 0.1, ease: "easeOut" }}
+              />
+            </svg>
+
+            {/* Glowing inner core */}
+            <div className="absolute inset-1 bg-white/[0.02] rounded-full group-hover:bg-teal-400/5 transition-colors duration-300" />
+
+            <ArrowUp className="w-4.5 h-4.5 text-[#D4AF37] group-hover:text-teal-400 stroke-[2.5] relative z-10 group-hover:-translate-y-0.5 transition-all duration-300" />
+            
+            {/* Tiny ambient tooltip ring for cursor feedback */}
+            <span className="absolute -top-7 scale-0 group-hover:scale-100 bg-[#0a0f18] text-white text-[9px] uppercase tracking-wider font-bold py-1 px-2.5 rounded-md border border-white/10 transition-all duration-200 pointer-events-none shadow-xl">
+              Up
+            </span>
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* 5. Mobile Sticky Bottom Action Call Ticker (Responsive support) */}
       <div className="fixed bottom-0 left-0 w-full bg-[#0d1522] border-t border-white/5 shadow-2xl grid grid-cols-3 z-45 md:hidden h-14">

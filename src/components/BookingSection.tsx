@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, User, Phone, Mail, FileText, Clock, CheckCircle2, AlertCircle, Sparkles } from 'lucide-react';
+import { Calendar, User, Phone, Mail, FileText, Clock, CheckCircle2, AlertCircle, Sparkles, X } from 'lucide-react';
 import { CLINIC_SERVICES } from '../data';
 import { Appointment } from '../types';
+import { motion, AnimatePresence } from 'motion/react';
 
 interface BookingSectionProps {
   onSuccessClose?: () => void;
@@ -21,6 +22,7 @@ export default function BookingSection({ onSuccessClose }: BookingSectionProps) 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isSuccess, setIsSuccess] = useState(false);
   const [newlyCreatedAppointment, setNewlyCreatedAppointment] = useState<Appointment | null>(null);
+  const [toasts, setToasts] = useState<Array<{ id: string; title: string; desc: string; type: 'success' | 'info' }>>([]);
 
   // Set default minimum date to today so patients don't book past dates
   const [minDateString, setMinDateString] = useState('');
@@ -118,6 +120,23 @@ export default function BookingSection({ onSuccessClose }: BookingSectionProps) 
     // Save newly created state for success visualization
     setNewlyCreatedAppointment(newAppointment);
     setIsSuccess(true);
+
+    // Dynamic Toast Notification trigger
+    const toastId = `toast-${Date.now()}`;
+    setToasts((prev) => [
+      ...prev,
+      {
+        id: toastId,
+        title: "Booking Recorded!",
+        desc: `Saved slot for ${newAppointment.fullName} (${newAppointment.treatmentRequired}) on ${newAppointment.preferredDate}!`,
+        type: 'success',
+      },
+    ]);
+
+    // Cleanup Toast after 4.5 seconds
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== toastId));
+    }, 4500);
   };
 
   const resetFormState = () => {
@@ -345,55 +364,187 @@ export default function BookingSection({ onSuccessClose }: BookingSectionProps) 
           </form>
         ) : (
           /* Animated success overlay notification */
-          <div className="p-4 py-8 text-center flex flex-col items-center gap-5 animate-in zoom-in-95 duration-150">
-            <div className="w-16 h-16 bg-teal-500/10 text-teal-400 rounded-full flex items-center justify-center border-4 border-teal-500/25">
-              <CheckCircle2 className="w-10 h-10 fill-none text-teal-400" />
+          <div className="p-4 py-8 text-center flex flex-col items-center gap-6 relative overflow-hidden">
+            
+            {/* Satisfying Confetti Sparkles Burst */}
+            <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+              {Array.from({ length: 24 }).map((_, i) => {
+                const angle = (i * 360) / 24 + Math.random() * 15;
+                const distance = 95 + Math.random() * 125;
+                const size = 5 + Math.random() * 8;
+                const colors = ['#14b8a6', '#D4AF37', '#10b981', '#38bdf8', '#fbbf24'];
+                const randomColor = colors[i % colors.length];
+                const shape = i % 3 === 0 ? 'circle' : i % 3 === 1 ? 'square' : 'triangle';
+                const xDist = Math.cos((angle * Math.PI) / 180) * distance;
+                const yDist = Math.sin((angle * Math.PI) / 180) * distance;
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ x: 0, y: 0, opacity: 1, scale: 0.1, rotate: 0 }}
+                    animate={{
+                      x: xDist,
+                      y: yDist,
+                      opacity: [1, 1, 0.8, 0],
+                      scale: [0.1, 1.2, 0.8, 0],
+                      rotate: [0, 360 + Math.random() * 360],
+                    }}
+                    transition={{
+                      duration: 1.5 + Math.random() * 0.8,
+                      ease: [0.1, 0.8, 0.3, 1],
+                      delay: Math.random() * 0.15,
+                    }}
+                    className="absolute"
+                    style={{
+                      width: size,
+                      height: shape !== 'triangle' ? size : undefined,
+                      backgroundColor: shape !== 'triangle' ? randomColor : 'transparent',
+                      borderRadius: shape === 'circle' ? '50%' : '2px',
+                      borderLeft: shape === 'triangle' ? `${size / 2}px solid transparent` : undefined,
+                      borderRight: shape === 'triangle' ? `${size / 2}px solid transparent` : undefined,
+                      borderBottom: shape === 'triangle' ? `${size}px solid ${randomColor}` : undefined,
+                    }}
+                  />
+                );
+              })}
             </div>
 
-            <div>
-              <div className="inline-flex items-center gap-1 bg-[#0a0f18] text-teal-400 text-[10px] font-bold px-2 py-0.5 rounded border border-teal-400/20 uppercase tracking-widest mb-2">
-                <Sparkles className="w-3 h-3 text-[#D4AF37]" /> Booking Recorded
+            {/* Glowing checkmark micro-animation with concentric wave rings */}
+            <div className="relative w-20 h-20 flex items-center justify-center mb-1">
+              <motion.div
+                initial={{ scale: 0.5, opacity: 0.8 }}
+                animate={{ scale: 2.2, opacity: 0 }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
+                className="absolute inset-0 rounded-full border border-teal-500/40"
+              />
+              <motion.div
+                initial={{ scale: 0.6, opacity: 0.6 }}
+                animate={{ scale: 2.8, opacity: 0 }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut", delay: 0.5 }}
+                className="absolute inset-0 rounded-full border border-[#D4AF37]/30"
+              />
+              <motion.div
+                initial={{ scale: 0.8, opacity: 1 }}
+                animate={{ scale: 1.2, opacity: 0.15 }}
+                transition={{ duration: 1.2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+                className="absolute inset-0 bg-gradient-to-r from-teal-500/10 to-[#D4AF37]/10 rounded-full blur-md"
+              />
+              <motion.div
+                initial={{ scale: 0, rotate: -45 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ type: "spring", damping: 12, stiffness: 120, delay: 0.1 }}
+                className="relative z-10 w-16 h-16 bg-gradient-to-br from-teal-500 to-emerald-600 text-black rounded-full flex items-center justify-center shadow-2xl shadow-teal-500/30 border border-teal-300/30"
+              >
+                <CheckCircle2 className="w-10 h-10 stroke-[2.5px] text-[#0a0f18]" />
+              </motion.div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="z-10"
+            >
+              <div className="inline-flex items-center gap-1.5 bg-[#0a0f18] text-teal-400 text-[10px] font-bold px-3 py-1 rounded-full border border-teal-400/20 uppercase tracking-widest mb-3">
+                <Sparkles className="w-3.5 h-3.5 text-[#D4AF37] animate-pulse" /> Verified Registration
               </div>
               
-              <h4 className="font-serif text-[#D4AF37] text-2xl tracking-tight leading-snug font-light">Appointment Request Received!</h4>
+              <h4 className="font-serif text-[#D4AF37] text-2xl md:text-3xl tracking-tight leading-snug font-light">Appointment Slot Requested!</h4>
               
-              <p className="font-sans text-gray-400 text-sm leading-relaxed max-w-md mx-auto mt-2 text-pretty">
-                Thank you, <strong>{newlyCreatedAppointment?.fullName}</strong>. We have temporarily registered your slot for <strong>{newlyCreatedAppointment?.preferredDate}</strong> during the <strong>{newlyCreatedAppointment?.preferredTime}</strong> window.
+              <p className="font-sans text-gray-400 text-xs sm:text-sm leading-relaxed max-w-md mx-auto mt-2 text-pretty">
+                Thank you, <strong className="text-white font-semibold">{newlyCreatedAppointment?.fullName}</strong>. We have securely recorded your slot for <strong className="text-white font-semibold">{newlyCreatedAppointment?.preferredDate}</strong> during the <strong className="text-teal-400 font-semibold">{newlyCreatedAppointment?.preferredTime}</strong> window.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="bg-[#0a0f18]/80 p-4 rounded-2xl border border-white/5 w-full text-left font-sans text-xs flex flex-col gap-2 shadow-2xl">
-              <div className="flex justify-between border-b border-white/5 pb-1.5">
-                <span className="text-gray-500">Record ID:</span>
-                <span className="font-mono text-white font-bold">{newlyCreatedAppointment?.id}</span>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.45 }}
+              className="bg-[#0a0f18]/80 p-4 rounded-2xl border border-white/5 w-full text-left font-sans text-xs flex flex-col gap-2.5 shadow-2xl z-10"
+            >
+              <div className="flex justify-between border-b border-white/5 pb-2">
+                <span className="text-gray-500">Record Token:</span>
+                <span className="font-mono text-teal-400 font-bold uppercase tracking-wider">{newlyCreatedAppointment?.id}</span>
               </div>
-              <div className="flex justify-between border-b border-white/5 pb-1.5">
-                <span className="text-gray-500">Treatment Requested:</span>
+              <div className="flex justify-between border-b border-white/5 pb-2">
+                <span className="text-gray-500">Selected Specialty:</span>
                 <span className="text-[#D4AF37] font-semibold">{newlyCreatedAppointment?.treatmentRequired}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-500">Coordination Contact:</span>
+                <span className="text-gray-500">Callback Contact:</span>
                 <span className="text-white font-semibold">{newlyCreatedAppointment?.phoneNumber}</span>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-col gap-2.5 w-full mt-2">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="flex flex-col gap-2.5 w-full mt-2 z-10"
+            >
               <button
                 onClick={resetFormState}
-                className="w-full bg-[#0a0f18] hover:bg-white/5 border border-white/10 text-white font-sans text-xs font-bold py-3 px-4 rounded-xl shadow transition-colors cursor-pointer uppercase tracking-widest"
+                className="w-full bg-[#0a0f18] hover:bg-white/5 border border-white/10 hover:border-teal-400/40 text-teal-400 hover:text-white font-sans text-xs font-bold py-3.5 px-4 rounded-xl shadow-lg transition-all cursor-pointer uppercase tracking-widest active:scale-98"
               >
-                Close Notification
+                Book Another Slot / Close
               </button>
               
-              <p className="text-[10px] text-gray-500 font-sans">
+              <p className="text-[10px] text-gray-500 font-sans leading-relaxed">
                 You can review or cancel your saved submissions anytime inside the <strong>Staff Portal Dashboard</strong> log.
               </p>
-            </div>
+            </motion.div>
           </div>
         )}
 
       </div>
       
+      {/* Toast Notifications Overlay portal-style */}
+      <div className="fixed top-6 right-6 z-[99999] flex flex-col gap-3 min-w-[300px] sm:min-w-[340px] max-w-[400px] pointer-events-none">
+        <AnimatePresence>
+          {toasts.map((toast) => (
+            <motion.div
+              key={toast.id}
+              initial={{ opacity: 0, x: 80, y: -20, scale: 0.9 }}
+              animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+              exit={{ opacity: 0, x: 100, scale: 0.9, transition: { duration: 0.2 } }}
+              transition={{ type: "spring", damping: 15, stiffness: 200 }}
+              className="pointer-events-auto bg-[#0d1522]/98 backdrop-blur-md border border-teal-500/20 rounded-2xl p-4 shadow-2xl flex items-start gap-3.5 relative overflow-hidden"
+            >
+              {/* Animated timer bar decoration at bottom */}
+              <motion.div 
+                initial={{ width: "100%" }}
+                animate={{ width: "0%" }}
+                transition={{ duration: 4.5, ease: "linear" }}
+                className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-teal-400 via-[#D4AF37] to-emerald-500"
+              />
+
+              <div className="w-9 h-9 rounded-xl bg-teal-500/10 flex items-center justify-center text-teal-400 border border-teal-500/20 shrink-0">
+                <Sparkles className="w-4 h-4 text-[#D4AF37] animate-pulse" />
+              </div>
+
+              <div className="flex-1 min-w-0 pr-4">
+                <h5 className="font-serif text-white text-xs font-semibold tracking-wide flex items-center gap-1.5 uppercase">
+                  {toast.title}
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0 animate-ping" />
+                </h5>
+                <p className="font-sans text-gray-400 text-[11px] mt-1 leading-relaxed text-pretty">
+                  {toast.desc}
+                </p>
+              </div>
+
+              <button
+                onClick={() => {
+                  setToasts(prev => prev.filter(t => t.id !== toast.id));
+                }}
+                className="p-1 hover:bg-white/5 rounded-lg text-gray-400 hover:text-white transition-all cursor-pointer absolute top-3 right-3"
+                title="Dismiss notification"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+
     </div>
   );
 }

@@ -96,7 +96,7 @@ export default function HomeSection({ setActiveTab, openBookingModal }: HomeSect
             <div className="relative rounded-2xl overflow-hidden aspect-square sm:aspect-[4/3] lg:aspect-[1/1] shadow-2xl border border-white/10 bg-[#0d1522]">
               <img 
                 src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=1000" 
-                alt="Marks Dental Clinic interior clinic checkup Guwahati" 
+                alt="Markz Dental Clinic interior clinic checkup Guwahati" 
                 className="w-full h-full object-cover opacity-85 hover:opacity-100 transition-opacity duration-300"
                 referrerPolicy="no-referrer"
               />
@@ -105,7 +105,7 @@ export default function HomeSection({ setActiveTab, openBookingModal }: HomeSect
               <div className="absolute bottom-4 left-4 bg-[#0d1522]/90 backdrop-blur-md p-4 rounded-xl shadow-2xl border border-white/10 max-w-xs hidden sm:flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-teal-500 flex items-center justify-center text-[#0a0f18] font-bold font-sans">MD</div>
                 <div>
-                  <h4 className="font-sans font-bold text-white text-sm leading-tight">Dr. S. Sarma (MDS)</h4>
+                  <h4 className="font-sans font-bold text-white text-sm leading-tight">Dr. Sudheer Krishna</h4>
                   <p className="font-sans text-xs text-teal-400">Chief Consultant Implantologist</p>
                 </div>
               </div>
@@ -124,7 +124,7 @@ export default function HomeSection({ setActiveTab, openBookingModal }: HomeSect
             </h2>
             <div className="h-0.5 w-16 bg-[#D4AF37] mx-auto rounded-full mt-1" />
             <p className="font-sans text-gray-400 text-sm leading-relaxed mt-2 text-pretty">
-              At Marks Dental Clinic, we combine medical excellence with a deeply caring attitude, safeguarding your dental hygiene at every treatment stage.
+              At Markz Dental Clinic, we combine medical excellence with a deeply caring attitude, safeguarding your dental hygiene at every treatment stage.
             </p>
           </div>
 
@@ -261,7 +261,7 @@ export default function HomeSection({ setActiveTab, openBookingModal }: HomeSect
                   G
                 </div>
                 <div>
-                  <p className="font-sans font-bold text-xs text-white">Marks Dental Clinic Guwahati</p>
+                  <p className="font-sans font-bold text-xs text-white">Markz Dental Clinic Guwahati</p>
                   <p className="font-sans text-[10px] text-gray-500">Official Business Listing</p>
                 </div>
               </div>

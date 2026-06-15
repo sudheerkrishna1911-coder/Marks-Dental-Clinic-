@@ -83,13 +83,13 @@ export default function Header({ activeTab, setActiveTab, openBookingModal }: He
             <div className="w-10 h-10 rounded overflow-hidden flex items-center justify-center transition-transform hover:scale-105 duration-200 border border-white/10 shrink-0 bg-white">
               <img 
                 src="/src/assets/images/markz_favicon_v2_1781484369789.jpg" 
-                alt="Marks Dental Clinic Logo Icon" 
+                alt="Markz Dental Clinic Logo Icon" 
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-bold tracking-tight uppercase text-white font-sans">MARKS DENTAL</span>
+              <span className="text-lg font-bold tracking-tight uppercase text-white font-sans">MARKZ DENTAL</span>
               <span className="text-[9px] tracking-[0.25em] text-teal-400 -mt-1 font-sans font-bold">GUWAHATI • ASSAM</span>
             </div>
           </div>

@@ -60,7 +60,7 @@ export default function ServicesSection() {
         <h2 className="font-serif font-light text-3xl sm:text-4xl text-white tracking-tight">Our Professional Services & Treatments</h2>
         <div className="h-0.5 w-16 bg-[#D4AF37] mx-auto rounded-full mt-1" />
         <p className="font-sans text-gray-400 text-sm leading-relaxed mt-2 text-pretty">
-          Every procedure at Marks Dental Clinic is delivered by highly experienced dental MDS consultants using modern sterilizing hygiene standards, high-magnification diagnostics, and sterile techniques.
+          Every procedure at Markz Dental Clinic is delivered by highly experienced dental MDS consultants using modern sterilizing hygiene standards, high-magnification diagnostics, and sterile techniques.
         </p>
       </div>
 

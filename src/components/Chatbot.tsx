@@ -11,7 +11,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: "Hello! I am **Aura**, your virtual assistant at **Marks Dental Clinic**. 🦷✨\n\nHow can I help you today? You can ask me about our specialized treatments (like microscopic RCT or implants), timings, our lead consultants, or how to book an appointment!"
+      content: "Hello! I am **Aura**, your virtual assistant at **Markz Dental Clinic**. 🦷✨\n\nHow can I help you today? You can ask me about our specialized treatments (like microscopic RCT or implants), timings, our lead consultants, or how to book an appointment!"
     }
   ]);
   const [input, setInput] = useState('');
@@ -69,9 +69,9 @@ export default function Chatbot() {
 
   const quickReplies = [
     { label: "🕒 Opening Hours", text: "What are your clinic hours and timings?" },
-    { label: "👨‍⚕️ Dr. Sarma", text: "Tell me about Dr. S. Sarma and his credentials." },
+    { label: "👨‍⚕️ Dr. Sudheer", text: "Tell me about Dr. Sudheer Krishna and his credentials." },
     { label: "🦷 Dental Implants", text: "Do you offer advanced dental implants services?" },
-    { label: "📅 Book Spot", text: "How can I book an appointment at Marks Dental Clinic?" }
+    { label: "📅 Book Spot", text: "How can I book an appointment at Markz Dental Clinic?" }
   ];
 
   return (
@@ -114,7 +114,7 @@ export default function Chatbot() {
                     Online
                   </span>
                 </div>
-                <span className="text-[9px] text-[#D4AF37] tracking-wider uppercase font-semibold">Marks Dental Assistant</span>
+                <span className="text-[9px] text-[#D4AF37] tracking-wider uppercase font-semibold">Markz Dental Assistant</span>
               </div>
             </div>
             

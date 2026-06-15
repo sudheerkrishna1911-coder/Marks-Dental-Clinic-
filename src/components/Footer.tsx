@@ -24,13 +24,13 @@ export default function Footer({ setActiveTab, openBookingModal }: FooterProps) 
             <div className="w-10 h-10 rounded overflow-hidden flex items-center justify-center border border-white/10 shrink-0 bg-white">
               <img 
                 src="/src/assets/images/markz_favicon_v2_1781484369789.jpg" 
-                alt="Marks Dental Clinic Logo Icon" 
+                alt="Markz Dental Clinic Logo Icon" 
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-base font-bold tracking-tight uppercase text-white font-sans">MARKS DENTAL</span>
+              <span className="text-base font-bold tracking-tight uppercase text-white font-sans">MARKZ DENTAL</span>
               <span className="text-[8px] tracking-[0.25em] text-teal-400 -mt-1 font-sans font-bold">GUWAHATI • ASSAM</span>
             </div>
           </div>
@@ -167,7 +167,7 @@ export default function Footer({ setActiveTab, openBookingModal }: FooterProps) 
       </div>
 
       <div className="max-w-7xl mx-auto px-4 mt-12 pt-8 border-t border-white/5 text-center text-[10px] sm:text-xs text-gray-500 font-sans flex flex-col sm:flex-row justify-between items-center gap-4">
-        <p>&copy; {currentYear} Marks Dental Clinic. All Rights Reserved. Guwahati, Assam.</p>
+        <p>&copy; {currentYear} Markz Dental Clinic. All Rights Reserved. Guwahati, Assam.</p>
         <div className="flex items-center gap-5">
           <button onClick={() => handleNavigation('about')} className="hover:text-gray-300 cursor-pointer">Privacy Policy</button>
           <span>&middot;</span>

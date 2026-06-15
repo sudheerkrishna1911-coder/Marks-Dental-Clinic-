@@ -1,5 +1,6 @@
 import React from 'react';
 import { Target, Heart, Award, ShieldCheck, CheckCircle2, FlaskConical } from 'lucide-react';
+import FoundersSection from './FoundersSection';
 
 export default function AboutSection() {
   return (
@@ -15,7 +16,7 @@ export default function AboutSection() {
           <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 aspect-square sm:aspect-[4/3] lg:aspect-[1/1] bg-[#0d1522]">
             <img 
               src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800" 
-              alt="Marks Dental Clinic Advanced Diagnostic Dental Operatory" 
+              alt="Markz Dental Clinic Advanced Diagnostic Dental Operatory" 
               className="w-full h-full object-cover opacity-85 hover:opacity-100 transition-opacity duration-300"
               referrerPolicy="no-referrer"
             />
@@ -23,7 +24,7 @@ export default function AboutSection() {
             <div className="absolute bottom-4 right-4 bg-white/95 p-2 sm:p-3 rounded-xl shadow-2xl border border-white/10 max-w-[140px] sm:max-w-[160px] cursor-pointer hover:scale-105 transition-transform duration-300">
               <img 
                 src="/src/assets/images/markz_logo_v2_1781484356142.jpg" 
-                alt="Marks Dental Clinic Official Brand Logo" 
+                alt="Markz Dental Clinic Official Brand Logo" 
                 className="w-full h-auto object-contain rounded"
                 referrerPolicy="no-referrer"
               />
@@ -40,7 +41,7 @@ export default function AboutSection() {
           <div className="h-0.5 w-12 bg-[#D4AF37] rounded-full mt-1" />
           
           <p className="font-sans text-gray-450 text-sm leading-relaxed text-pretty text-gray-450">
-            At <strong>Marks Dental Clinic</strong>, we are committed to rewriting the traditional clinical narrative by making dental consults clean, comforting, and pain-free. Nestled in VIP Road, Guwahati, we cater to Assam with a combination of exceptional clinical MDS expertise, state-of-the-art dental equipment, and gentle chairside empathy.
+            At <strong>Markz Dental Clinic</strong>, we are committed to rewriting the traditional clinical narrative by making dental consults clean, comforting, and pain-free. Nestled in VIP Road, Guwahati, we cater to Assam with a combination of exceptional clinical MDS expertise, state-of-the-art dental equipment, and gentle chairside empathy.
           </p>
           <p className="font-sans text-gray-450 text-sm leading-relaxed text-pretty text-gray-450">
             We follow strict sterilization parameters that meet or exceed rigorous CDC guidelines. From single-visit root canals to guided titanium implant installations, we use premium metal-free composite materials (monolithic E-max and zirconia) to ensure your dental work doesn’t just feel strong, but looks indistinguishable from natural teeth.
@@ -88,6 +89,9 @@ export default function AboutSection() {
           </div>
         </div>
       </section>
+
+      {/* Meet the Founders Showcase */}
+      <FoundersSection />
 
       {/* Facilities, Technology, & Hygiene Standards */}
       <section className="max-w-7xl mx-auto w-full">

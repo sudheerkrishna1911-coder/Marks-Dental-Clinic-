@@ -307,7 +307,7 @@ export default function ContactSection() {
             
             {/* Pop-up bubble */}
             <div className="mt-2.5 bg-[#05080c] border border-white/10 text-white p-3 rounded-lg shadow-2xl flex flex-col items-center gap-1.5 whitespace-nowrap">
-              <p className="font-sans font-bold text-xs text-[#D4AF37]">Marks Dental Clinic</p>
+              <p className="font-sans font-bold text-xs text-[#D4AF37]">Markz Dental Clinic</p>
               <p className="font-mono text-[9px] text-gray-500">1st Floor, Royal Square, VIP Road</p>
             </div>
           </div>

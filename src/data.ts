@@ -7,7 +7,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     iconName: 'Shield',
     category: 'General',
     shortDescription: 'Comprehensive checkups, standard restorations, deep digital cleanings, and proactive diagnostics for the entire family.',
-    fullDescription: 'General dentistry serves as your first line of defense against oral diseases. At Marks Dental Clinic, we focus on detailed diagnostics, comprehensive oral examinations, and state-of-the-art dental cleaning. Our modern digital radiography system minimizes radiation while delivering instant high-resolution imagery to detect microscopic dental decays and structural concerns before they progress.',
+    fullDescription: 'General dentistry serves as your first line of defense against oral diseases. At Markz Dental Clinic, we focus on detailed diagnostics, comprehensive oral examinations, and state-of-the-art dental cleaning. Our modern digital radiography system minimizes radiation while delivering instant high-resolution imagery to detect microscopic dental decays and structural concerns before they progress.',
     benefits: [
       'Early detection of tooth decays, saving cost and discomfort',
       'Removal of stubborn tartar and dental plaque causing chronic halitosis',
@@ -22,7 +22,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     ],
     faqs: [
       {
-        question: 'How often should I visit Marks Dental Clinic for a routine checkup?',
+        question: 'How often should I visit Markz Dental Clinic for a routine checkup?',
         answer: 'We strongly recommend visiting us every 6 months for a routine checkup and professional cleaning to sustain pristine oral hygiene and detect latent issues early.'
       },
       {
@@ -53,7 +53,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     faqs: [
       {
         question: 'How long do E-Max porcelain veneers typically last?',
-        answer: 'Under standard conditions and with optimal oral care, premium ceramic veneers from Marks Dental Clinic can last between 10 to 15 years or more.'
+        answer: 'Under standard conditions and with optimal oral care, premium ceramic veneers from Markz Dental Clinic can last between 10 to 15 years or more.'
       },
       {
         question: 'Does the smile makeover procedure cause any pain?',
@@ -97,7 +97,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     iconName: 'Layers',
     category: 'Implants',
     shortDescription: 'Permanent teeth replacement using bio-compatible titanium posts to restore complete chewing strength.',
-    fullDescription: 'Dental implants are the ultimate gold standard of modern tooth replacement. They act as artificial dental roots structurally fused direct to your jawbone, offering a foundation that is as strong and secure as natural teeth. At Marks Dental Clinic, we execute guided implant surgery, using high-resolution CBCT scans to place implants with micrometric precision for complete long-term success.',
+    fullDescription: 'Dental implants are the ultimate gold standard of modern tooth replacement. They act as artificial dental roots structurally fused direct to your jawbone, offering a foundation that is as strong and secure as natural teeth. At Markz Dental Clinic, we execute guided implant surgery, using high-resolution CBCT scans to place implants with micrometric precision for complete long-term success.',
     benefits: [
       'Structural bone preservation, preventing standard facial collapse from tooth loss',
       'Provides 100% natural chewing forces, allowing you to enjoy your favorite foods',
@@ -127,7 +127,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     iconName: 'Activity',
     category: 'General',
     shortDescription: 'Relieve deep dental pain and salvage decayed natural teeth with painless rotary root canal therapy.',
-    fullDescription: 'When decay hits the soft inner pulp of your tooth, it causes acute, throbbing pain. Instead of extracting the tooth, Root Canal Treatment (RCT) removes the infected pulp, sanitizes the internal root canals, and seals them. At Marks Dental Clinic, we specialize in Single-Sitting Root Canals using modern computer-assisted rotary endodontics, making the entire procedure fast, incredibly precise, and pain-free.',
+    fullDescription: 'When decay hits the soft inner pulp of your tooth, it causes acute, throbbing pain. Instead of extracting the tooth, Root Canal Treatment (RCT) removes the infected pulp, sanitizes the internal root canals, and seals them. At Markz Dental Clinic, we specialize in Single-Sitting Root Canals using modern computer-assisted rotary endodontics, making the entire procedure fast, incredibly precise, and pain-free.',
     benefits: [
       'Instant pain relief from tooth infections and pressure',
       'Saves your natural tooth, maintaining healthy facial and jaw structure',

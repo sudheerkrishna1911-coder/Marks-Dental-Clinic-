@@ -203,7 +203,7 @@ export default function BlogSection() {
                   </div>
                   <div>
                     <p className="font-sans text-sm font-bold text-[#D4AF37]">{selectedArticle.author}</p>
-                    <p className="font-sans text-xs text-gray-450 text-gray-450">Official Clinical Consultant at Marks Dental Clinic</p>
+                    <p className="font-sans text-xs text-gray-450 text-gray-450">Official Clinical Consultant at Markz Dental Clinic</p>
                   </div>
                 </div>
                 

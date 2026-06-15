@@ -21,8 +21,13 @@ export default function Footer({ setActiveTab, openBookingModal }: FooterProps) 
         {/* About & Branding Column */}
         <div className="flex flex-col gap-5">
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => handleNavigation('home')}>
-            <div className="w-10 h-10 bg-teal-500 rounded flex items-center justify-center font-serif text-2xl font-bold text-[#0a0f18]">
-              M
+            <div className="w-10 h-10 rounded overflow-hidden flex items-center justify-center border border-white/10 shrink-0 bg-white">
+              <img 
+                src="/src/assets/images/markz_favicon_1781484131489.jpg" 
+                alt="Marks Dental Clinic Logo Icon" 
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
             </div>
             <div className="flex flex-col">
               <span className="text-base font-bold tracking-tight uppercase text-white font-sans">MARKS DENTAL</span>

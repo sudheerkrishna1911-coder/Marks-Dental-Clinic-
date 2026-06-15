@@ -80,8 +80,13 @@ export default function Header({ activeTab, setActiveTab, openBookingModal }: He
             onClick={() => handleNavClick('home')} 
             className="flex items-center gap-3 cursor-pointer select-none"
           >
-            <div className="w-10 h-10 bg-teal-500 rounded flex items-center justify-center font-serif text-2xl font-bold text-[#0a0f18] transition-transform hover:scale-105 duration-200">
-              M
+            <div className="w-10 h-10 rounded overflow-hidden flex items-center justify-center transition-transform hover:scale-105 duration-200 border border-white/10 shrink-0 bg-white">
+              <img 
+                src="/src/assets/images/markz_favicon_1781484131489.jpg" 
+                alt="Marks Dental Clinic Logo Icon" 
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
             </div>
             <div className="flex flex-col">
               <span className="text-lg font-bold tracking-tight uppercase text-white font-sans">MARKS DENTAL</span>
